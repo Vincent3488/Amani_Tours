@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites - Amani Travels</title>
+    <link rel="icon" href="./files/logo.png">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <style>
+        .favorites-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .favorites-list .box {
+            margin: 1rem;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Video & Header -->
+
+    <div class="banner">
+        <video src="./files/bgvid.mp4" type="video/mp4" autoplay muted loop></video>
+    
+    <!-- Header -->
+
+    <div class="content" id="home"> 
+        <nav>
+            <img src="./files/logo.png" class="logo" alt="Logo" title="FirstFlight Travels">
+            
+            <ul class="navbar">
+                <li>
+                    <a href="#home">Home</a>
+                    <a href="#locations">Locations</a>
+                    <a href="#package">Packages</a>
+                    <a href="./about.html">About Us</a>
+                    <a href="./about.html">Contact Us</a>
+                </li>
+            </ul>
+        </nav>
+ 
+        <div class="title">
+            <h1>AMANI LUX</h1>
+            <p>Plan your trip with us and travel around the world with the most affordable packages!</p>
+            <a href="./register.html" class="button">Register Now!</a>
+        </div>
+    </div>
+    </div>
+
+    <!-- Favorites -->
+
+    <section class="favorites">
+        <div class="favorites-title">
+            <h2>Your Favorite Packages</h2>
+        </div>
+
+        <div class="favorites-list" id="favorites-list">
+            <!-- Favorite packages will be inserted here by JavaScript -->
+        </div>
+
+    </section>
+
+    <!-- Link to JavaScript -->
+    <script src="./scripts.js"></script>
+    <script>
+        // JavaScript to load favorite packages
+        document.addEventListener('DOMContentLoaded', function() {
+            const favoritesList = document.getElementById('favorites-list');
+
+            // Example package data
+            const packageData = {
+                'Bronze': { img: './files/p1.jpg', price: '$10,000' },
+                'Silver': { img: './files/p2.jpg', price: '$29,999' },
+                'Gold': { img: './files/p3.jpg', price: '$27,899' },
+                'Platinum': { img: './files/p4.jpg', price: '$38,000' }
+            };
+
+            // Retrieve favorites from localStorage
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+            // Display favorite packages
+            favorites.forEach(packageName => {
+                const pkg = packageData[packageName];
+                if (pkg) {
+                    const packageDiv = document.createElement('div');
+                    packageDiv.className = 'box';
+                    packageDiv.innerHTML = `
+                        <img src="${pkg.img}" alt="${packageName}">
+                        <h3>${pkg.price}</h3>
+                        <p>${packageName}</p>
+                    `;
+                    favoritesList.appendChild(packageDiv);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Package</title>
+    <link rel="icon" href="./files/logo.png">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body class="register-body">
+
+    <!-- Success Message Popup -->
+    <div id="successPopup" class="success-popup">Booking successfully completed!</div>
+
+    <nav>
+        <img src="./files/logo.png" class="logo" alt="Logo" title="FirstFlight Travels">
+        <ul class="navbar">
+            <li>
+                <a href="./index.html">Home</a>
+                <a href="./index.html#locations">Locations</a>
+                <a href="./index.html#package">Packages</a>
+                <a href="./about.html">About Us</a>
+                <a href="./contact.html">Contact Us</a>
+                <a href="./login.html">Login</a>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="registration">
+        <div class="register-form">
+            <h1>Book Your <span>Package</span></h1>
+            <form id="bookingForm" onsubmit="return validateForm()">
+                <input type="text" name="myname1" placeholder="Name" id="name" required>
+                <input type="email" name="myemail" placeholder="Email-Id" id="email" required>
+                <input type="tel" name="myphone" placeholder="Phone No." id="phonenum" required>
+                <input type="number" name="myage" placeholder="Age" id="age" required>
+                <h4>Gender</h4>
+                <input type="radio" name="mygender" value="Male" required> Male &nbsp; &nbsp;
+                <input type="radio" name="mygender" value="Female"> Female
+                <h4>Departure</h4>
+                <input type="datetime-local" name="departuredate" id="departuredate" required>
+                <h4>Return</h4>
+                <input type="datetime-local" name="returndate" id="returndate" required>
+                <h4>Travel Destination</h4>
+                <input type="checkbox" name="td" value="Kashmir"> Kashmir &nbsp; &nbsp;
+                <input type="checkbox" name="td" value="Istanbul"> Istanbul &nbsp; &nbsp;
+                <input type="checkbox" name="td" value="Paris"> Paris &nbsp; &nbsp;
+                <input type="checkbox" name="td" value="Bali"> Bali &nbsp; &nbsp;
+                <input type="checkbox" name="td" value="Dubai"> Dubai &nbsp; &nbsp;
+                <input type="checkbox" name="td" value="Geneva"> Geneva &nbsp; &nbsp;
+                <input type="checkbox" name="td" value="Port Blair"> Port Blair &nbsp; &nbsp;
+                <input type="checkbox" name="td" value="Rome"> Rome &nbsp; &nbsp;
+                <br><br>
+                <h4>Package</h4>
+                <input type="radio" name="locations" value="Bronze" required> Bronze &nbsp; &nbsp;
+                <input type="radio" name="locations" value="Silver"> Silver &nbsp; &nbsp;
+                <input type="radio" name="locations" value="Gold"> Gold &nbsp; &nbsp;
+                <input type="radio" name="locations" value="Platinum"> Platinum &nbsp; &nbsp;
+                <br><br>
+                <input type="checkbox" name="t&c" required checked> I accept the Terms & Conditions.
+                <br><br>
+                <input type="submit" value="Submit" class="submitbtn">
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer">
+        <div class="foot">
+            <div class="footer-content">
+                <div class="footlinks">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./register.html">Register</a></li>
+                        <li><a href="./about.html">About Us</a></li>
+                        <li><a href="./contact.html">Contact Us</a></li>
+                        <li><a href="./login.html">Login</a></li>
+                    </ul>
+                </div>
+
+                <div class="footlinks">
+                    <h4>Connect</h4>
+                    <div class="social">
+                        <a href="https://www.facebook.com/vinny.deprince.96/" target="_blank"><i class='bx bxl-facebook'></i></a>
+                        <a href="https://www.instagram.com/vinnyagunda/" target="_blank"><i class='bx bxl-instagram'></i></a>
+                        <a href="https://x.com/VincentAgunda3" target="_blank"><i class='bx bxl-twitter'></i></a>
+                        <a href="https://www.linkedin.com/in/vincent-agunda-/" target="_blank"><i class='bx bxl-linkedin'></i></a>
+                        <a href="https://github.com/Vincent3488" target="_blank"><i class='bx bxl-github'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="end">
+            <p>Copyright © 2024 Amani lux<br>All Rights Reserved.</p>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        function validateForm() {
+            const tel = document.getElementById("phonenum").value;
+
+            if (tel.length < 10) {
+                alert("Phone number must be at least 10 digits!");
+                return false;
+            } else if (isNaN(tel)) {
+                alert("Phone number should not include characters!");
+                return false;
+            }
+
+            // Create form data object
+            const formData = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                phone: tel,
+                age: document.getElementById("age").value,
+                gender: document.querySelector('input[name="mygender"]:checked').value,
+                departure: document.getElementById("departuredate").value,
+                return: document.getElementById("returndate").value,
+                destinations: Array.from(document.querySelectorAll('input[name="td"]:checked')).map(cb => cb.value),
+                package: document.querySelector('input[name="locations"]:checked').value
+            };
+
+            // Get existing bookings
+            const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+
+            // Add new booking
+            bookings.push(formData);
+
+            // Save updated bookings
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+
+            // Display the custom success popup
+            const successPopup = document.getElementById('successPopup');
+            successPopup.classList.add('show');
+
+            // Hide the message and redirect to confirmation page after 3 seconds
+            setTimeout(() => {
+                successPopup.classList.remove('show');
+                window.location.href = './confirmation.html';
+            }, 3000); // 3 seconds delay
+
+            return false; // Prevent form submission
+        }
+    </script>
+    <style>
+        .success-popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: green;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.5em;
+            text-align: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Animation to fade in the popup */
+        .success-popup.show {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</body>
+</html>

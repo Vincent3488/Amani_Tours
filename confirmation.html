@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <link rel="icon" href="./files/logo.png">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body class="confirmation-body">
+
+    <nav>
+        <img src="./files/logo.png" class="logo" alt="Logo" title="FirstFlight Travels">
+        <ul class="navbar">
+            <li>
+                <a href="./index.html">Home</a>
+                <a href="./index.html#package">Packages</a>
+                <a href="./confirmation.html">Confirm</a>
+
+              
+            </li>
+        </ul>
+    </nav>
+
+    <section class="confirmation">
+        <div class="confirmation-details">
+            <h1>Booking <span>Confirmation</span></h1>
+            <div id="bookingDetails"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer">
+        <div class="foot">
+            <div class="footer-content">
+                <div class="footlinks">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./register.html">Register</a></li>
+                        <li><a href="./about.html">About Us</a></li>
+                        <li><a href="./contact.html">Contact Us</a></li>
+                        <li><a href="./login.html">Login</a></li>
+                    </ul>
+                </div>
+
+                <div class="footlinks">
+                    <h4>Connect</h4>
+                    <div class="social">
+                        <a href="https://www.facebook.com/vinny.deprince.96/" target="_blank"><i class='bx bxl-facebook'></i></a>
+                        <a href="https://www.instagram.com/vinnyagunda/" target="_blank"><i class='bx bxl-instagram'></i></a>
+                        <a href="https://x.com/VincentAgunda3" target="_blank"><i class='bx bxl-twitter'></i></a>
+                        <a href="https://www.linkedin.com/in/vincent-agunda-/" target="_blank"><i class='bx bxl-linkedin'></i></a>
+                        <a href="https://github.com/Vincent3488" target="_blank"><i class='bx bxl-github'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="end">
+            <p>Copyright © 2024 Amani lux<br>All Rights Reserved.</p>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            const lastBooking = bookings[bookings.length - 1];
+
+            if (lastBooking) {
+                document.getElementById("bookingDetails").innerHTML = `
+                    <p><strong>Name:</strong> ${lastBooking.name}</p>
+                    <p><strong>Email:</strong> ${lastBooking.email}</p>
+                    <p><strong>Phone:</strong> ${lastBooking.phone}</p>
+                    <p><strong>Age:</strong> ${lastBooking.age}</p>
+                    <p><strong>Gender:</strong> ${lastBooking.gender}</p>
+                    <p><strong>Departure:</strong> ${new Date(lastBooking.departure).toLocaleString()}</p>
+                    <p><strong>Return:</strong> ${new Date(lastBooking.return).toLocaleString()}</p>
+                    <p><strong>Destinations:</strong> ${lastBooking.destinations.join(', ')}</p>
+                    <p><strong>Package:</strong> ${lastBooking.package}</p>
+                `;
+            } else {
+                document.getElementById("bookingDetails").innerHTML = `<p>No booking details available.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
