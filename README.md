@@ -1,5 +1,7 @@
 Amani Lux Travel Website
 
+Live Demo link
+https://tvavelify.netlify.app/#home
 
 Project Overview
 Amani Lux Travel Website is a fully responsive and interactive travel booking platform where users can explore various travel packages, mark their favorite packages, and book them seamlessly. The website offers a rich user experience with features like adding packages to favorites, a comprehensive booking system, and detailed information about various travel locations.
